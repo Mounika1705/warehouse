@@ -1,0 +1,4 @@
+# Security settings for development
+# Doesn't include production related settings
+
+src/warehouse/secret_settings.py
