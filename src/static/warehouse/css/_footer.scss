@@ -1,0 +1,31 @@
+@import 'mixins.scss';
+@import 'variables.scss';
+
+#footer {
+    a {
+        color: rgba(255,255,255,.5) !important;
+    }
+    a:hover, a:focus {
+        color: rgba(255,255,255,.75) !important;
+        text-decoration: none;
+    }
+    b,
+    h5 {
+        color: #fff !important;
+    }
+    .social {
+        background-color: seagreen;
+        .fa-facebook-f {
+            @include social-icon($bg-color-facebook)
+        }
+        .fa-google-plus-g {
+            @include social-icon($bg-color-google-plus)
+        }
+        .fa-instagram {
+            @include social-icon($bg-color-instagram)
+        }
+        .fa-twitter {
+            @include social-icon($bg-color-twitter)
+        }
+    }
+}

@@ -2,3 +2,8 @@
 # Doesn't include production related settings
 
 src/warehouse/secret_settings.py
+
+# Removes Byte-compiled, optimized and DLL files
+__pycache__/
+*.py[cod]
+*$py.class

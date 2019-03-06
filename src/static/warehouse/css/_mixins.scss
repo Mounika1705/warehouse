@@ -1,0 +1,20 @@
+/* This file contains all the custom mixins */
+/* For more information on Mixins and Syntax
+ * refer https://www.sass-lang.com/guide#topic-6
+ */
+
+// Mixin for styling social icons
+@mixin social-icon($bg-color) {
+    background-color: $bg-color;
+    border-radius: 50%;
+    color: white;
+    height: 35px;
+    padding: 10px;
+    width: 35px;
+    &:focus,
+    &:hover {
+        background-color: white;
+        border-color: $bg-color;
+        color: $bg-color;
+    }
+}
