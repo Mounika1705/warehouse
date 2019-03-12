@@ -1,0 +1,9 @@
+# The below packages have constraints when installed on
+# windows, to avoid the installed issues we use
+# --install-options. But using this options raises
+# UserWarning: Disabling all use of wheels due to the use
+# of --build-options / --global-opt ions / --install-options.
+# So, install this requirements separately.
+
+rcssmin==1.0.6 --install-option="--without-c-extensions"
+rjsmin==1.0.12 --install-option="--without-c-extensions"
