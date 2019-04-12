@@ -1,0 +1,44 @@
+#tabs {
+    margin: 5% 30%;
+    border: 1px solid #28a745;
+    border-radius: 5%;
+    h2 {
+        margin: 5%;
+    }
+    .tabcontent {
+        margin: 3% 2%;
+    }
+    button {
+        padding: 2% 5%;
+        border: 1px solid;
+        color: white;
+        margin: 5% -27% 0 25%;
+        &.active {
+            background-color: #28a745;
+        }
+        background-color: #dc3545;
+    }
+    .registration_form .row {
+        padding-left: 6%;
+        button {
+            color: white;
+            border: 1px solid darkgreen;
+            padding: 2% 4%;
+            margin: 5%;
+            border-radius: 10%;
+        }
+    }
+    .login_form {
+        padding: 0 20%;
+        button {
+            color: white;
+            border: 1px solid darkgreen;
+            padding: 10% 15%;
+            margin: 35% 70% 0;
+            border-radius: 10%;
+        }
+    }
+    ul li {
+        list-style: none;
+    }
+}

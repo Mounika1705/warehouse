@@ -33,20 +33,22 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
+    'stock',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'stock',
+    'users',
     'compressor',
     'django_pyscss',
 ]
+
+AUTH_USER_MODEL = 'users.WarehouseUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -136,9 +138,18 @@ STATICFILES_DIRS = (
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
 
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_pyscss.compressor.DjangoScssFilter'),
 )
+
+# Email
+# https://docs.djangoproject.com/en/2.1/topics/email/
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = USER_EMAIL_ADDRESS
+EMAIL_HOST_PASSWORD = USER_EMAIL_PASSWORD
+EMAIL_PORT = 587

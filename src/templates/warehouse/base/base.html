@@ -8,12 +8,13 @@
 
         <!-- includes css files -->
         {% include 'warehouse/base/links.html' %}
+
     </head>
     <body>
         <!-- includes navigation bar -->
         {% include 'warehouse/base/navigation.html' %}
 
-        <main>
+        <main >
             {% block content %}
             {% endblock %}
         </main>
@@ -23,5 +24,8 @@
 
         <!-- includes page footer -->
         {% include 'warehouse/base/footer.html' %}
+
+        {% block js %}
+        {% endblock %}
     </body>
     </html>

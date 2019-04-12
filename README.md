@@ -84,8 +84,5 @@ Type http://127.0.0.1:8000/ in the browser to visit the web application.
 
 ## Running the tests
 
+This project is licensed under the GNU General Public License v3.0 License - see the [LICENSE](https://github.com/Mounika1705/warehouse/blob/master/README.md) file for details
 
-
-## License
-
-This project is licensed under the GNU General Public License v3.0 License - see the [LICENSE] file for details

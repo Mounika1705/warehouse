@@ -1,0 +1,30 @@
+{% extends 'users/authenticate.html' %}
+{% load static %}
+
+{% block title %}LOGIN{% endblock %}
+
+{% block login %}
+<div id="login">
+    <h2 class="text-center">Welcome Again</h2>
+    <form method="post">
+        <div class="login_form">
+            {% csrf_token %}
+            <div class="row text-center">
+                {{form.as_p}}
+            </div>
+            <div class="row">
+                <h6>Don't have an account?</h6>
+                <a href="{% url 'register' %}">Sign Up</a>
+            </div>
+            <div class="row">
+                <a href="{% url 'register' %}">Forgot Password?</a>
+                <p><button type="submit" class="bg-success">Login</button></p>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'users/js/login.js' %}"></script>
+{% endblock %}
