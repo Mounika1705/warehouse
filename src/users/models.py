@@ -84,15 +84,15 @@ class WarehouseUser(AbstractBaseUser):
     objects = WarehouseUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'date_of_birth',
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'date_of_birth', 'gender',
                        'phone_number', 'employee_id']
 
     def __str__(self):
         return self.email
 
     def get_username(self):
-        if self.first_name and self.last_name:
-            return self.last_name + ' ' + self.first_name
+        if self.email:
+            return self.email
 
     def has_perm(self, perm, obj=None):
         """Check whether user has specific permission"""
@@ -105,11 +105,6 @@ class WarehouseUser(AbstractBaseUser):
         if not self.staff:
             return False
         return True
-
-    @property
-    def is_active(self):
-        """Is the user a active member"""
-        return self.active
 
     @property
     def is_staff(self):

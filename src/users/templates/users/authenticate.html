@@ -1,19 +1,17 @@
 {% extends 'warehouse/base/base.html' %}
 {% load static %}
-
-{% block title %}AUTHENTICATION{% endblock %}
-
+{% block title %}Authentication{% endblock %}
 {% block content %}
-    <div id="tabs">
-        <button id="register" class="tablinks" onclick="location.href={% url 'register' %}">Register</button>
-        <button id="login" class="tablinks" onclick="location.href={% url 'login' %}">Login</button>
-    <div class="tabcontent" >
+<div id="tabs">
+    <button id="register" class="tablinks" onclick="location.href={% url 'register' %}">Register</button>
+    <button id="login" class="tablinks" onclick="location.href={% url 'login' %}">Login</button>
+    <div class="tabcontent">
         {% block register %}
         {% endblock %}
     </div>
-    <div class="tabcontent" >
+    <div class="tabcontent">
         {% block login %}
         {% endblock %}
     </div>
-    </div>
+</div>
 {% endblock %}

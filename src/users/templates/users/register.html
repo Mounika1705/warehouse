@@ -1,73 +1,69 @@
 {% extends 'users/authenticate.html' %}
 {% load static %}
-
-{% block title %}REGISTER{% endblock %}
-
+{% block title %}Register{% endblock %}
 {% block register %}
-
- <div id="registration">
-     <h2 class="text-center">Sign Up For Free</h2>
-     <form method='POST' action='{% url "register" %}'>
-         {% csrf_token %}
-         <div class="registration_form text-left text-xs-left text-sm-left text-md-left">
-             <div class="row">
-                 <div class="col-xs-12 col-sm-6 col-md-6">
-                     <p>{{form.first_name.label}}</p>
-                     <p>{{form.first_name}}{{form.last_name.errr}}</p>
-                 </div>
-                 <div class="col-xs-12 col-sm-6 col-md-6">
-                     <p>{{form.last_name.label}}</p>
-                     <p>{{form.last_name}}{{form.last_name.errors}}</p>
-                 </div>
-             </div>
-             <div class="row">
-                 <div class="col-xs-12 col-sm-6 col-md-6">
-                     <p>{{form.email.label}}</p>
-                     <p>{{form.email}}{{form.email.errors}}</p>
-                 </div>
-                 <div class="col-xs-12 col-sm-6 col-md-6">
-                     <p>{{form.gender.label}}</p>
-                     <p>{{form.gender}}{{form.gender.errors }}</p>
-                 </div>
-             </div>
-             <div class="row">
-                 <div class="col-xs-12 col-sm-6 col-md-6">
-                     <p>{{form.date_of_birth.label}}</p>
-                     <p>{{form.date_of_birth}}{{form.date_of_birth.errors}}</p>
-                 </div>
-                 <div class="col-xs-12 col-sm-6 col-md-6">
-                     <p>{{form.phone_number.label}}</p>
-                     <p>{{form.phone_number}}{{form.phone_number.errors}}</p>
-                 </div>
-             </div>
-             <div class="row">
-                 <div class="col-xs-12 col-sm-6 col-md-6">
-                     <p>{{form.password1.label}}</p>
-                     <p>{{form.password1}}{{form.password1.errors}}</p>
-                 </div>
-                 <div class="col-xs-12 col-sm-6 col-md-6">
-                     <p>{{form.password2.label}}</p>
-                     <p>{{form.password2}}{{ form.password2.errors }}</p>
-                 </div>
-             </div>
-             <div class="row">
-                 <div class="col-xs-12 col-sm-6 col-md-6">
-                     <p>{{form.staff}}{{form.staff.label}}</p>
-                 </div>
-                 <div class="col-xs-12 col-sm-6 col-md-6">
-                     <p>{{form.employee_id.label}}{{form.employee_id}}</p>
-                 </div>
-             </div>
-             <div class="row">
-                 <div class="col-xs-12 col-sm-12 col-md-12">
-                     <p><button type="submit" class="bg-success">Sign Up</button></p>
-                 </div>
-             </div>
-         </div>
-     </form>
- </div>
+<div id="registration">
+    <h2 class="text-center text-white">Sign Up For Free</h2>
+    <form method='POST' action='{% url "register" %}'>
+        {% csrf_token %}
+        <div class="registration_form text-left text-xs-left text-sm-left text-md-left">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <p>{{form.first_name.label}}</p>
+                    <p>{{form.first_name}}{{form.last_name.errr}}</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <p>{{form.last_name.label}}</p>
+                    <p>{{form.last_name}}{{form.last_name.errors}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <p>{{form.email.label}}</p>
+                    <p>{{form.email}}{{form.email.errors}}</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <p>{{form.gender.label}}</p>
+                    <p>{{form.gender}}{{form.gender.errors }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <p>{{form.date_of_birth.label}}</p>
+                    <p>{{form.date_of_birth}}{{form.date_of_birth.errors}}</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <p>{{form.phone_number.label}}</p>
+                    <p>{{form.phone_number}}{{form.phone_number.errors}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <p>{{form.password1.label}}</p>
+                    <p>{{form.password1}}{{form.password1.errors}}</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <p>{{form.password2.label}}</p>
+                    <p>{{form.password2}}{{ form.password2.errors }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <p>{{form.staff}}{{form.staff.label}}</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <p>{{form.employee_id.label}}{{form.employee_id}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <button type="submit" class="bg-success">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
 {% endblock %}
-
 {% block js %}
-    <script src="{% static 'users/js/register.js' %}"></script>
+<script src="{% static 'users/js/register.js' %}"></script>
 {% endblock %}

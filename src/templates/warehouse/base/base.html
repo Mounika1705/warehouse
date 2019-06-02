@@ -1,31 +1,25 @@
 <!doctype html>
-    <html lang="en">
+<html lang="en">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="description" content="A Website for warehouse company to control and administer warehouse operations">
         <title>{% block title %}BASE{% endblock %}</title>
-
         <!-- includes css files -->
         {% include 'warehouse/base/links.html' %}
-
     </head>
     <body>
         <!-- includes navigation bar -->
         {% include 'warehouse/base/navigation.html' %}
-
-        <main >
+        <main class="py-5 my-3">
             {% block content %}
             {% endblock %}
         </main>
-
         <!-- includes javascript files -->
         {% include 'warehouse/base/scripts.html' %}
-
         <!-- includes page footer -->
         {% include 'warehouse/base/footer.html' %}
-
         {% block js %}
         {% endblock %}
     </body>
-    </html>
+</html>

@@ -18,6 +18,7 @@ from django.urls import re_path, path, include
 from .views import *
 from users.views import LoginView, RegisterView
 
+
 urlpatterns = [
     re_path('^$', IndexView.as_view(), name='index'),
     re_path('^about/$', AboutView.as_view(), name='about'),

@@ -9,13 +9,13 @@ from django.core.mail import EmailMessage
 from .tokens import user_activation_token
 from .models import WarehouseUser
 from datetime import date
-
+from collections import namedtuple
 
 User = get_user_model()
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(label='Email')
+    email = forms.EmailField(label='Username')
     password = forms.CharField(widget=forms.PasswordInput)
 
     def __init__(self, request, *args, **kwargs):
@@ -29,7 +29,7 @@ class LoginForm(forms.Form):
         password = data.get('password')
         query = User.objects.filter(email=email)
         if query.exists():
-            not_active = query.filter(is_active=False)
+            not_active = query.filter(active=False)
             if not_active.exists():
                 raise forms.ValidationError("User Account is not active. Please Active")
         user = authenticate(request, username=email, password=password)
@@ -37,6 +37,66 @@ class LoginForm(forms.Form):
             raise forms.ValidationError("Invalid Username or Password")
         login(request, user)
         return data
+
+
+class UpdateForm(forms.Form):
+    email = forms.EmailField(label='Username')
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(UpdateForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        request = self.request
+        data = self.cleaned_data
+        print(User.objects.all())
+        to_email = data.get('email')
+        query = User.objects.filter(email=to_email).values('id', 'active')[0]
+        item = namedtuple('item', ['pk', 'email'])
+        if query:
+            not_active = query['active']
+            if not not_active:
+                raise forms.ValidationError("User Account is not active. Please Active")
+        else:
+            raise forms.ValidationError("User Account does not Exist")
+        current_site = get_current_site(self.request)
+        mail_subject = 'Warehouse User Password Change'
+        message = render_to_string('users/password_reset.html', {
+            'user': query,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(query['id'])).decode(),
+            'token': user_activation_token.make_token(item(pk=query['id'],
+                                                           email=to_email))
+        })
+        email = EmailMessage(mail_subject, message, to=[to_email])
+        email.send()
+        return query
+
+
+class PasswordChangeForm(forms.ModelForm):
+    email = forms.EmailField(label='Username', disabled=True)
+    password1 = forms.CharField(label='Password',
+                                widget=forms.PasswordInput(attrs={'placeholder': 'Enter Password'}))
+    password2 = forms.CharField(label='Password Confirmation',
+                                widget=forms.PasswordInput(attrs={'placeholder': 'ReEnter Password'}))
+
+    class Meta:
+        model = WarehouseUser
+        fields = ("email",)
+
+    def clean_password1(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        if password1 and password2 and password1 == password2:
+            raise forms.ValidationError("Passwords didnt match")
+        return password1
+
+    def save(self, commit=True):
+        user = super(PasswordChangeForm, self).save(commit=False)
+        user.set_password(self.cleaned_data['password1'])
+        if commit:
+            user.save()
+        return user
 
 
 class RegisterForm(forms.ModelForm):
@@ -64,17 +124,9 @@ class RegisterForm(forms.ModelForm):
             'gender': forms.RadioSelect(),
             'phone_number': forms.TextInput(attrs={'placeholder': 'Phone Number'}),
         }
-    #
-    # def clean(self, *args, **kwargs):
-    #     data = self.cleaned_data
-    #     first_name = data.get('first_name')
-    #     if not first_name:
-    #         raise forms.ValidationError("First Name is required")
-    #     return data
 
     def clean_password2(self):
         """Check that two passwords match"""
-        print(self.cleaned_data)
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
         if password1 and password2 and password1 != password2:
@@ -83,26 +135,23 @@ class RegisterForm(forms.ModelForm):
 
     def save(self, commit=True):
         # Save provided password in hashed format
-        print("hl")
-        user = super().save(commit=False)
+        user = super(RegisterForm, self).save(commit=False)
         user.set_password(self.cleaned_data['password1'])
         user.staff = self.cleaned_data['staff']
         user.active = False
-        print(dir(self))
+        if commit:
+            user.save()
         current_site = get_current_site(self.request)
         mail_subject = 'Activate Warehouse User Account'
         message = render_to_string('users/activate_email.html', {
             'user': user,
             'domain': current_site.domain,
-            'uid':  urlsafe_base64_encode(force_bytes(user.pk)).decode(),
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
             'token': user_activation_token.make_token(user)
         })
         to_email = self.cleaned_data.get('email')
         email = EmailMessage(mail_subject, message, to=[to_email])
         email.send()
-        print('SENT')
-        if commit:
-            user.save()
         return user
 
 

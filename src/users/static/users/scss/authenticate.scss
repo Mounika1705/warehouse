@@ -4,6 +4,7 @@
     border-radius: 5%;
     h2 {
         margin: 5%;
+        color: forestgreen;
     }
     .tabcontent {
         margin: 3% 2%;
@@ -25,7 +26,6 @@
             border: 1px solid darkgreen;
             padding: 2% 4%;
             margin: 5%;
-            border-radius: 10%;
         }
     }
     .login_form {
@@ -33,9 +33,6 @@
         button {
             color: white;
             border: 1px solid darkgreen;
-            padding: 10% 15%;
-            margin: 35% 70% 0;
-            border-radius: 10%;
         }
     }
     ul li {

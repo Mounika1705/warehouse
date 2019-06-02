@@ -1,0 +1,25 @@
+{% extends 'warehouse/base/base.html' %}
+{% load static %}
+{% block title %}Change Password{% endblock %}
+{% block content %}
+<div class="container" id="password_rst">
+    <form method="post">
+        <div class="password_form">
+            <div class="row text-center border py-3 w-50 m-auto border-white">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    {% csrf_token %}
+                    <fieldset>
+                        <legend>
+                            <h3 class="text-white">Enter Registered Username</h3>
+                        </legend>
+                        {{form.as_p}}
+                    </fieldset>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <button type="submit" class="bg-success text-white">Reset Password</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
